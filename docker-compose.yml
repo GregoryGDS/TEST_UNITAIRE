@@ -1,21 +1,30 @@
 version: '3.6'
-# 3.6 pour windows
+
 services:
-  web:
-     image: php:7.2-apache
-     environment:
-       - ALLOW_OVERRIDE=true
-     ports:
-       - "8042:80"
-     links:
-       - db
-     volumes:
-       - ./app:/var/www/html/
-  db:
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - 8891:80
-    environment:
-        - MYSQL_DATABASE=project
-        - MYSQL_USER=root
-        - MYSQL_PASSWORD=root
+    db:
+        image: mysql:8.0.17
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    web:
+        build: .docker/php
+        depends_on:
+            - db
+        volumes:
+            - .:/var/www/project:cached
+        ports:
+            - 8042:80
+
+    pma:
+      image: phpmyadmin/phpmyadmin
+      container_name: pma_projet_test_unitaire
+      environment:
+        - PMA_HOST=db
+      ports:
+        - 8012:80
+      depends_on: 
+        - db 
