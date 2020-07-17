@@ -18,8 +18,8 @@ class User
     }
    
     public function isValid(){
-        if(!empty($this->mail) && !empty($this->prenom) && !empty($this->nom) && !empty($this->age)){
-            $this->verifEmail($this->mail);
+        if(!empty($this->email) && !empty($this->prenom) && !empty($this->nom) && !empty($this->age)){
+            $this->verifEmail($this->email);
             $this->verifAge($this->age);
         }else{
             throw new InvalidArgumentException('Remplir tous les champs !!');
@@ -36,11 +36,12 @@ class User
         }
     }
 
-    public function verifEmail($email){
-        if(filter_var($email, FILTER_VALIDATE_mail)){
+    public function verifEmail($email)
+    {
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             return true;
         } else {
-            throw new InvalidArgumentException('Fomat email invalide !!');
+            throw new InvalidArgumentException('Format email invalide !!');
         }
     }
 
@@ -55,17 +56,17 @@ class User
         ]; 
     }
 
-    public function getmail(): string
+    public function getEmail(): string
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function getprenom(): string
+    public function getPrenom(): string
     {
         return $this->prenom;
     }
 
-    public function getnom(): string
+    public function getNom(): string
     {
         return $this->nom;
     }

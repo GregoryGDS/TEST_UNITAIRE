@@ -12,12 +12,12 @@ class UserTest extends TestCase
 
     public function testValid(){
         $this->testValid = new User('testValNom', 'testValPrenom', 'testVal@gmail.com', 30);
-        $this->assertTrue($this->valid->isValid());
+        $this->assertTrue($this->testValid->isValid());
     }
 
     public function testInvalid(){
-        $this->testValid = new User('testValNom', 'testValPrenom', 'testVal@gmail.com', 30);
-        $this->invalid->isValid();
+        $this->testInvalid = new User('testInValNom', 'testInValPrenom', 'testInValMail', 12);
+        $this->assertTrue($this->testInvalid->isValid());
     }
 
     public function testEmailValid(){
