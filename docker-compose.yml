@@ -15,16 +15,20 @@ services:
         depends_on:
             - db
         volumes:
-            - .:/var/www/project:cached
+            - .:/var/www/project:cached #workdir dans dockerfile
         ports:
             - 8042:80
+    node:
+        image: node:12-alpine
+        command: sh -c "yarn install && yarn encore dev --watch"
+        volumes:
+            - .:/app:cached
+        working_dir: /app
 
-    pma:
-      image: phpmyadmin/phpmyadmin
-      container_name: pma_projet_test_unitaire
-      environment:
-        - PMA_HOST=db
-      ports:
-        - 8012:80
-      depends_on: 
-        - db 
+    composer:
+        image: composer:1.9.0
+        command: install
+        depends_on:
+            - web
+        volumes:
+            - .:/app
