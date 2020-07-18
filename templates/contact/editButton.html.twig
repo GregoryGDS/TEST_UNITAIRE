@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('contact_edit', {'id': contact.id}) }}" >
+    <input type="hidden" name="_method" value="GET">
+    <input type="hidden" name="_token" value="{{ csrf_token('edit' ~ contact.id) }}">
+    <button class="btn">Edit</button>
+</form>

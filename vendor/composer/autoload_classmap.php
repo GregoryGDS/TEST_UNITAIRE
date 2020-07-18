@@ -6,7 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\ContactController' => $baseDir . '/src/Controller/ContactController.php',
+    'App\\Entity\\Contact' => $baseDir . '/src/Entity/Contact.php',
+    'App\\Form\\ContactType' => $baseDir . '/src/Form/ContactType.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Repository\\ContactRepository' => $baseDir . '/src/Repository/ContactRepository.php',
     'Collator' => $vendorDir . '/symfony/intl/Resources/stubs/Collator.php',
     'Doctrine\\Bundle\\DoctrineBundle\\Command\\CreateDatabaseDoctrineCommand' => $vendorDir . '/doctrine/doctrine-bundle/Command/CreateDatabaseDoctrineCommand.php',
     'Doctrine\\Bundle\\DoctrineBundle\\Command\\DoctrineCommand' => $vendorDir . '/doctrine/doctrine-bundle/Command/DoctrineCommand.php',
