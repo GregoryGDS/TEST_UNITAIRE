@@ -30,21 +30,27 @@ class ContactController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $error = '';
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($contact);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('contact_index');
+            
+            $error = $contact->verifPhoneNumber($form->getData()->getPhoneNumber());
+            if(!$error){
+                $entityManager->persist($contact);
+                $entityManager->flush();
+                
+                return $this->redirectToRoute('contact_index');
+            }           
         }
 
         return $this->render('contact/new.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
+            'error' => $error,
         ]);
     }
 
