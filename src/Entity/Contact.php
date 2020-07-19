@@ -126,11 +126,14 @@ class Contact
 
 
     public function verifPhoneNumber($number){
-        $pattern = '/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\0-9]*$/';
-        if(preg_match($pattern,$number)){
-            return false; //pas d'erreur
+        if($number){
+            $pattern = '/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\0-9]*$/';
+            if(preg_match($pattern,$number)){
+                return false; //pas d'erreur
+            }
+            return 'Le numéro de téléphone n\'est pas valide';
         }
-        return 'Le numéro de téléphone n\'est pas valide';
+        return false;
     }
 
     public function verifEmail($mail){
