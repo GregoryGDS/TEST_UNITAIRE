@@ -39,6 +39,8 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min="10", minMessage="Le téléphone doit avoir au moins 10 caractères",
+     * max="14", maxMessage="Le téléphone est trop long")
      */
     private $phoneNumber;
 
