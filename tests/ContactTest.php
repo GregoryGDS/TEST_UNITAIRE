@@ -11,7 +11,7 @@ class ContactTest extends TestCase
 {
     private $contact;
 
-    public function setUp()
+    public function setUp():void
     {
         $this->test = new Contact();
         $this->test->newContact('testFirstName', 'testLastName', 'testValidMail@gmail.com', '07.50.95.48.34', 'TestTag');
@@ -58,11 +58,23 @@ class ContactTest extends TestCase
     }
 
     public function testEmailValid(){
-        $this->assertFalse($this->test->verifEmail($this->getEmail()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
+        $this->assertFalse($this->test->verifEmail($this->test->getEmail()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
     }
 
     public function testEmailInvalid(){
-        $this->assertNotRegExp($this->testInvalid->verifEmail($this->getEmail()));
+        $this->assertFalse($this->testInvalid->verifEmail($this->testInvalid->getEmail()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
+    }
+
+    public function testPhoneNumberFormat(){
+        $this->assertIsString($this->test->getPhoneNumber());
+    }
+
+    public function testValidPhoneNumber(){
+        $this->assertFalse($this->test->verifPhoneNumber($this->test->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
+    }
+
+    public function testInvalidPhoneNumber(){
+        $this->assertFalse($this->testInvalid->verifPhoneNumber($this->testInvalid->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
     }
 
     public function testTagNotEmpty(){
@@ -75,24 +87,5 @@ class ContactTest extends TestCase
 
     public function testTagFormat(){
         $this->assertIsString($this->test->getTag());
-    }
-
-    public function testPhoneNumberFormat(){
-        $this->assertIsString($this->test->getPhoneNumber());
-    }
-
-    public function testValidPhoneNumber(){
-        $this->assertFalse($this->test->verifPhoneNumber($this->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
-
-        $this->test->setPhoneNumber('+33323000000');
-        $this->assertFalse($this->test->verifPhoneNumber($this->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
-
-        $this->test->setPhoneNumber('03-23-00-00-00');
-        $this->assertFalse($this->test->verifPhoneNumber($this->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
-    }
-
-    public function testInvalidPhoneNumber(){
-        $this->assertFalse($this->testInvalid->verifPhoneNumber($this->getPhoneNumber()));//dans fonction verif return false si valide (pour être utilisé dans le controller)
-    }
     }
 }

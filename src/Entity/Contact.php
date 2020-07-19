@@ -54,11 +54,11 @@ class Contact
     {
         return $this->id;
     }
-
-    public function newContact(string $lastname, string $firstname, string $email, string $tag, ?string $phoneNumber = null)
+    
+    public function newContact(string $firstName, string $lastName, string $email, ?string $phoneNumber = null, string $tag)
     {
-        $this->lastname = $lastname;
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->email = $email;
         $this->phoneNumber = $phoneNumber;
         $this->tag = $tag;
