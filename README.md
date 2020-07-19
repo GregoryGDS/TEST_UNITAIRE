@@ -1,7 +1,5 @@
-#PROJECT TEST UNITAIRE
-
-#DEBUT faire migration, sinon pas de table
-
+# PROJECT TEST UNITAIRE
+# DEBUT faire migration, sinon pas de table
 
 commande de test :
 docker run --rm -w /home/exo -v ${PWD}:/home/exo php:latest ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests 
