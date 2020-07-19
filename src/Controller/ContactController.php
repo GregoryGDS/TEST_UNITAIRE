@@ -38,7 +38,8 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             
-            $error = $contact->verifPhoneNumber($form->getData()->getPhoneNumber());
+            $error .= $contact->verifPhoneNumber($form->getData()->getPhoneNumber());
+            //$error .= $contact->verifEmail($form->getData()->getEmail());
             if(!$error){
                 $entityManager->persist($contact);
                 $entityManager->flush();

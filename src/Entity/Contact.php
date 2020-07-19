@@ -133,5 +133,12 @@ class Contact
         return 'Le numéro de téléphone n\'est pas valide';
     }
 
+    public function verifEmail($mail){
+        $pattern = '/^.+\@\S+\.\S+$/';
+        if(preg_match($pattern,$mail)){
+            return false; //pas d'erreur
+        }
+        return 'Le mail n\'est pas valide';
+    }
 
 }
