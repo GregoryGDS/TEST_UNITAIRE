@@ -124,7 +124,6 @@ class Contact
         return $this;
     }
 
-
     public function verifPhoneNumber($number){
         if($number){
             $pattern = '/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\0-9]*$/';
