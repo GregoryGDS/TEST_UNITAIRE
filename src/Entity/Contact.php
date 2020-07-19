@@ -39,6 +39,8 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min="10", minMessage="Le téléphone doit avoir au moins 10 caractères",
+     * max="14", maxMessage="Le téléphone est trop long")
      */
     private $phoneNumber;
 
@@ -51,6 +53,15 @@ class Contact
     public function getId(): ?int
     {
         return $this->id;
+    }
+    
+    public function newContact(string $firstName, string $lastName, string $email, ?string $phoneNumber = null, string $tag)
+    {
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->phoneNumber = $phoneNumber;
+        $this->tag = $tag;
     }
 
     public function getFirstName(): ?string
@@ -112,4 +123,24 @@ class Contact
 
         return $this;
     }
+
+    public function verifPhoneNumber($number){
+        if($number){
+            $pattern = '/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\0-9]*$/';
+            if(preg_match($pattern,$number)){
+                return false; //pas d'erreur
+            }
+            return 'Le numéro de téléphone n\'est pas valide';
+        }
+        return false;
+    }
+
+    public function verifEmail($mail){
+        $pattern = '/^.+\@\S+\.\S+$/';
+        if(preg_match($pattern,$mail)){
+            return false; //pas d'erreur
+        }
+        return 'Le mail n\'est pas valide';
+    }
+
 }
