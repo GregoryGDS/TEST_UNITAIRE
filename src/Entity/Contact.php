@@ -53,6 +53,15 @@ class Contact
         return $this->id;
     }
 
+    public function newContact(string $lastname, string $firstname, string $email, string $tag, ?string $phoneNumber = null)
+    {
+        $this->lastname = $lastname;
+        $this->firstname = $firstname;
+        $this->email = $email;
+        $this->phoneNumber = $phoneNumber;
+        $this->tag = $tag;
+    }
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
